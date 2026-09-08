@@ -1,0 +1,6 @@
+fastapi>=0.115,<1
+nonebot2[fastapi]==2.5.0
+nonebot-adapter-qq @ git+https://github.com/nonebot/adapter-qq.git@fc81f6776ddc253b43d7ba23ab8cfe1aab040b87
+httpx>=0.28,<0.29
+websockets>=15,<16
+python-dotenv>=1,<2

@@ -1,0 +1,7 @@
+{
+  "server_url": "http://127.0.0.1:8080",
+  "token_env": "REQUEST_ME_TOKEN",
+  "host_label": "WSL",
+  "codex_binary": "/absolute/path/to/codex",
+  "app_server_url": "unix:///home/USER/.codex/app-server-control/app-server-control.sock"
+}

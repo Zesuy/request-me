@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+*.local.json
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+dist/
+bin/
+.local/
+.codegraph/
