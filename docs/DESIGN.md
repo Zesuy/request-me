@@ -6,7 +6,7 @@
 
 request-me 将人作为异步调用的一方。Agent 在需要人提供信息、选择方向或完成现实操作时交接工作；人的回答随后成为原 Codex 会话的新一轮输入。通知用于传递进展和结果。
 
-首版聚焦 QQ 与 Codex，服务端、MCP、Bridge 在同一仓库维护并分别构建、部署。MCP 与 Bridge 使用 Go，便于跨平台分发。QQ 服务端的技术实现可复用 NoneBot 原型。洗浴继续在自己的项目维护，其他 Agent 和邮件确认留待后续实际需求。
+首版聚焦 QQ 与 Codex，服务端、MCP、Bridge 在同一仓库维护并分别部署。MCP 与 Bridge 由同一个 Node.js 包提供，安装后暴露两个独立命令；QQ 服务端使用 Python/NoneBot。洗浴继续在自己的项目维护，其他 Agent 和邮件确认留待后续实际需求。
 
 ## 用户原话：request_human 的用途
 
@@ -77,7 +77,7 @@ QQ 来源行示例：`检查设备连接 · tmp · WSL`。标题尚未生成时�
 
 1. 定义请求、回答、关闭请求及投递回执的最小协议，确定 Bridge 与会话关联方式。
 2. 从原型提取 QQ 连接、Markdown、原生按钮、人工输入和已有重复请求处理。
-3. 实现 Go MCP 与常驻 Bridge，接通 QQ → 原 Codex 会话的回答回程。
+3. 实现 Node.js MCP 与常驻 Bridge，接通 QQ → 原 Codex 会话的回答回程。
 4. 验证两个 Bridge、多个会话同时提问，按钮和文字分别回到正确会话。
 5. 验证待答、关闭、投递成功与失败反馈，以及回答后继续工作、发送结果或再次提问的完整体验。
 
@@ -87,7 +87,7 @@ QQ 来源行示例：`检查设备连接 · tmp · WSL`。标题尚未生成时�
 
 工作区：`D:/documents/GitHub/codex/localmanage`。
 
-- `request-me/`：正式仓库，包含 Go MCP、Go Bridge、NoneBot QQ 服务端及最小协议，已完成真实按钮与人工输入回程验证。
+- `request-me/`：正式仓库，包含同一 npm 包内的 MCP、Bridge、NoneBot QQ 服务端及最小协议；协议已完成真实按钮与人工输入回程验证。
 - `nonebot/`：此前初始化的文档仓库骨架，入口已指向本说明。
 - `nonebot-prototype/`：旧实现、Git 历史和未提交内容的完整参考；QQ Bot 与 Windows 反向隧道已在目录整理时停止。
 - `xiaoding-bath-server/`：现有独立洗浴服务。

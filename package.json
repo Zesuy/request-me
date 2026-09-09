@@ -1,0 +1,38 @@
+{
+  "name": "request-me",
+  "version": "0.1.0",
+  "description": "Asynchronous human-in-the-loop bridge for Codex",
+  "type": "module",
+  "bin": {
+    "request-me-mcp": "dist/bin/request-me-mcp.js",
+    "request-me-bridge": "dist/bin/request-me-bridge.js"
+  },
+  "files": [
+    "dist",
+    "config",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "clean:test": "node -e \"require('node:fs').rmSync('dist-test',{recursive:true,force:true})\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && npm run clean:test && tsc -p tsconfig.test.json && node --test dist-test/test/core.test.js",
+    "prepack": "npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "ws": "^8.18.3",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "@types/ws": "^8.18.1",
+    "typescript": "^5.8.3"
+  },
+  "license": "MIT"
+}
