@@ -13,6 +13,21 @@ request-me 包含一个 QQ 请求中心和每台 Codex 主机各自运行的 MCP
 
 新增主机时，先为它生成不同于其他主机的 token，再同时更新服务端映射和该主机的私密配置。当前状态保存在内存中；重启前应先处理或关闭仍待回答的请求。
 
+正式镜像由 GitHub Actions 发布到 `ghcr.io/zesuy/request-me-server`，当前只构建 `linux/amd64`。`main` 分支和手动构建产生 `latest` 与不可变的 `sha-<commit>` 标签；`v*` Git 标签另外产生对应的语义版本标签。部署时推荐固定 `sha-<commit>` 或版本标签。
+
+仓库和镜像为私有时，部署主机需要具有 `read:packages` 权限的 GitHub token：
+
+```sh
+echo "$GHCR_TOKEN" | docker login ghcr.io -u Zesuy --password-stdin
+docker pull ghcr.io/zesuy/request-me-server:latest
+docker run -d --name request-me --restart unless-stopped \
+  --env-file /absolute/path/request-me.env \
+  -p 8080:8080 \
+  ghcr.io/zesuy/request-me-server:latest
+```
+
+`request-me.env` 使用 `server/.env.example` 中的字段且只保存在部署主机。容器默认监听 `0.0.0.0:8080`，可由反向代理或隧道控制外部可达范围。镜像不包含 Bridge、MCP、本地配置或凭据。
+
 ## Codex 主机
 
 Node.js 20 及以上版本中构建：
