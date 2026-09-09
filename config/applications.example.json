@@ -1,0 +1,9 @@
+[
+  {
+    "id": "example",
+    "command": "/example",
+    "endpoint": "http://example-connector:8766/v1/events",
+    "token_env": "EXAMPLE_CONNECTOR_TOKEN",
+    "timeout": 100
+  }
+]

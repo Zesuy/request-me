@@ -60,6 +60,8 @@ token 可以由进程环境、服务管理器或本机私密启动器提供。�
 
 ## 验收
 
+可选 HTTP 应用通过 `REQUEST_ME_APPLICATIONS_FILE` 加载。Docker 部署时将应用配置目录只读挂载到 `/config`，设置 `REQUEST_ME_APPLICATIONS_FILE=/config/applications.json`，并向 QQ 容器注入应用条目 `token_env` 指定的凭据。接入端应在同一可达网络独立运行，具体配置和消息契约见 [APPLICATIONS.md](APPLICATIONS.md)。
+
 部署后按顺序确认：
 
 1. QQ Bot 已连接，请求中心端口可达。

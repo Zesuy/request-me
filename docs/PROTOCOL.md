@@ -1,5 +1,7 @@
 # HTTP 协议 v1
 
+配置化应用命令与操作卡片见 [HTTP 应用接入](APPLICATIONS.md)。下面描述 Codex 人工请求与通知协议。
+
 MCP 对外工具为 `send_user_notification`、`request_user_response`、`close_user_request`，投递渠道由服务端配置。通知发送后继续工作；需要用户参与时发起请求，收到发送回执后交接本轮。工具更名保持下面的 HTTP 路径与请求 ID 生成规则不变。
 
 服务端根据 `Authorization: Bearer <token>` 确认 Bridge 身份。模型仅提供正文、选项和需关闭的请求 ID；MCP 从逐次调用元数据取得具体 Codex thread ID。配置中的 app-server 地址决定对应 Codex 主机。

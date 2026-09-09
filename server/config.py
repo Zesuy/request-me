@@ -13,6 +13,7 @@ class Settings:
     bridge_tokens: dict[str, str]
     host: str = "127.0.0.1"
     port: int = 8080
+    applications_file: str | None = None
 
 
 def load_settings() -> Settings:
@@ -29,4 +30,5 @@ def load_settings() -> Settings:
     if len(set(bridges.values())) != len(bridges):
         raise ValueError("each bridge must use a distinct token")
     return Settings(app_id, secret, owner, bridges,
-                    os.getenv("REQUEST_ME_HOST", "127.0.0.1"), int(os.getenv("REQUEST_ME_PORT", "8080")))
+                    os.getenv("REQUEST_ME_HOST", "127.0.0.1"), int(os.getenv("REQUEST_ME_PORT", "8080")),
+                    os.getenv("REQUEST_ME_APPLICATIONS_FILE"))

@@ -39,14 +39,16 @@ def render(message: QQMessage):
     rich = Message([MessageSegment.markdown(markdown)])
     buttons = []
     for index, button in enumerate(message.buttons):
-        if button.kind in {"option", "close"}:
-            data = f"request:{message.request_id}:{button.kind}:{button.id}"
+        if button.kind in {"option", "close", "action"}:
+            data = (f"app:{message.request_id}:{button.id}" if button.kind == "action"
+                    else f"request:{message.request_id}:{button.kind}:{button.id}")
             action = Action(type=1, permission=Permission(type=2), data=data,
                             unsupport_tips="当前 QQ 客户端不支持回调按钮")
         else:
             action = Action(type=2, permission=Permission(type=2), data=button.value,
                             reply=True, enter=False, unsupport_tips="请手动输入回复")
-        visited = {"option": f"已提交：{button.label}", "close": "已关闭", "manual": "人工输入"}[button.kind]
+        visited = {"option": f"已提交：{button.label}", "action": f"已提交：{button.label}",
+                   "close": "已关闭", "manual": "人工输入"}[button.kind]
         buttons.append(Button(id=str(index), render_data=RenderData(
             label=button.label, visited_label=visited, style=0), action=action))
     if buttons:

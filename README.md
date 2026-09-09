@@ -8,6 +8,8 @@
 
 核心实现已包括 Node.js MCP、Node.js Bridge 和 Python/NoneBot QQ 服务端。首版范围为 Codex 与 QQ 的人工交互，以及附带的通知能力；原型保存在相邻的 `nonebot-prototype/`。
 
+外部应用通过[配置化 HTTP 接入](docs/APPLICATIONS.md)处理 QQ 命令和操作卡片。应用在独立仓库维护业务调用与呈现，Bot 按配置转发命令、保存按钮回程并转换 QQ 消息。
+
 ## 运行
 
 Node.js 20 及以上版本中安装依赖并构建：

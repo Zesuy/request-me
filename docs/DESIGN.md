@@ -8,6 +8,8 @@ request-me 将人作为异步调用的一方。Agent 在需要人提供信息、
 
 首版聚焦 QQ 与 Codex，服务端、MCP、Bridge 在同一仓库维护并分别部署。MCP 与 Bridge 由同一个 Node.js 包提供，安装后暴露两个独立命令；QQ 服务端使用 Python/NoneBot。洗浴继续在自己的项目维护，其他 Agent 和邮件确认留待后续实际需求。
 
+外部业务通过配置化 HTTP 应用接入：Bot 根据命令配置路由到应用，应用返回 Markdown、动作按钮和上下文；点击事件根据保存的卡片归属回到同一个应用。业务操作卡片与人工请求分别处理。Bath 的 HTTP 客户端、状态解释和呈现由 `xiaoding-bath-server` 中的独立接入端负责。具体契约见 [APPLICATIONS.md](APPLICATIONS.md)。
+
 ## 用户原话：request_human 的用途
 
 > request human应当被用于：按你的要求做了xxx，但发现xxx（很重要的信息），我没有擅自xxx，接下来我们应该xxx？，然后可以随他心意给出abc选项，或者不给选项直接给让他回复。或者：我们本应xxx，但我发现xxx，我尝试了xxx，但最后发现无法xxx。接下来我应该？abc。或者说，我尝试了xxx，现在xxx状态如何，就等你xxx（比如说操作物理设备重新连接等），当你xxx完成后点击按钮我会重新开始检查。同样的，话说如果人不想回复，我们应该？

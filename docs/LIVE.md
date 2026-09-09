@@ -1,5 +1,7 @@
 # 真实联调现场
 
+2026-09-09：通用 HTTP 应用接入与 Bath 独立接入端已完成源码实现。通过临时本地 HTTP 接入端，通用路由真实调用 `mi9.lan:8765/v1/bath/status`，取得 `COMPLETED` 和 `START` 操作；保存卡片后触发刷新动作，再次查询成功。QQ Markdown 与原生回调结构已本地验证；此次未调用开始、停止或支付。服务端 18 项测试与 Bath 接入端 2 项测试通过。新应用代码尚未部署到 j1900，QQ 命令/按钮实机验收待部署后执行。
+
 2026-09-08：最初的 Go MCP 已由真实 WSL Codex 调用，QQ 已接受请求；用户点击 A 后，Bridge 将回答送回同一个任务，Agent 调用 MCP 的通知工具，QQ 接受回报。随后人工输入“这是一个回复测试会话”也回到同一任务，Agent 原样引用并通过 QQ 回报。按钮与人工输入两条真实闭环均已通过。
 
 同日，MCP 与 Bridge 已等价迁移到同一个 Node.js/TypeScript 包。Node MCP 已在 WSL 使用真实配置完成 stdio 初始化和 `tools/list`，返回 `request_user_response`、`send_user_notification`、`close_user_request`；Node 与 Python 请求中心的双 Bridge 路由集成测试通过。
