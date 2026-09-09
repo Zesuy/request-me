@@ -1,6 +1,8 @@
 # 真实联调现场
 
-2026-09-09：通用 HTTP 应用接入与 Bath 独立接入端已完成源码实现。通过临时本地 HTTP 接入端，通用路由真实调用 `mi9.lan:8765/v1/bath/status`，取得 `COMPLETED` 和 `START` 操作；保存卡片后触发刷新动作，再次查询成功。QQ Markdown 与原生回调结构已本地验证；此次未调用开始、停止或支付。服务端 18 项测试与 Bath 接入端 2 项测试通过。新应用代码尚未部署到 j1900，QQ 命令/按钮实机验收待部署后执行。
+2026-09-09：通用 HTTP 应用接入与 Bath 独立接入端已完成并部署。通过临时本地 HTTP 接入端，通用路由真实调用状态接口，取得 `COMPLETED` 和 `START` 操作；保存卡片后触发刷新动作，再次查询成功。服务端 18 项测试与 Bath 接入端 2 项测试通过。
+
+j1900 的 QQ 中心使用镜像 `ghcr.io/zesuy/request-me-server:sha-fd34eb5`，Bath 接入端使用本地构建的 `xiaoding-bath-connector:08ef1a8`，分别在 `/opt/containers/request-me` 与 `/opt/containers/bath-connector` 管理。两个容器均 healthy，QQ 已连接。Bot 挂载通用应用配置，`/bath` 路由到 `http://bath-connector:8766/v1/events`；接入端单独持有设备 API 凭据。已从真实 Bot 容器经过独立接入端查询 mi9，得到“订单已完成 / 金额 0.00 CNY”及开始、刷新按钮。未调用开始、停止或支付。QQ 命令及按钮实机验收等待用户发送 `/bath status` 并点击刷新。
 
 2026-09-08：最初的 Go MCP 已由真实 WSL Codex 调用，QQ 已接受请求；用户点击 A 后，Bridge 将回答送回同一个任务，Agent 调用 MCP 的通知工具，QQ 接受回报。随后人工输入“这是一个回复测试会话”也回到同一任务，Agent 原样引用并通过 QQ 回报。按钮与人工输入两条真实闭环均已通过。
 
